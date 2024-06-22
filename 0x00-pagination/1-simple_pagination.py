@@ -35,6 +35,6 @@ class Server:
         assert page > 0 and page_size > 0
         first, last = index_range(page, page_size)
         ans = self.dataset()
-        if last > len(ans) and first > len(ans):
+        if first > len(ans):
             return []
         return ans[first:last]
