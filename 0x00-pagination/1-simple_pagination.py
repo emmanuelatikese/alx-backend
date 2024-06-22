@@ -31,6 +31,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        '''this function return list'''
         assert type(page) == int and type(page_size) == int
         assert page > 0 and page_size > 0
         first, last = index_range(page, page_size)
