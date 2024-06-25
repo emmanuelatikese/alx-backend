@@ -11,5 +11,6 @@ class BasicCache(BaseCaching):
         self.cache_data[key] = item
 
     def get(self, key):
-        '''all we doing is getting'''
-        return self.cache_data.get(key)
+        '''getting as always'''
+        return self.cache_data[key] if key in self.cache_data or\
+            key is not None else None
