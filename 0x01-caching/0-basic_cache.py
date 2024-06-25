@@ -5,8 +5,6 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class BasicCache(BaseCaching):
     '''inherit from base_caching'''
-    def __init__(self):
-        super().__init__()
 
     def put(self, key, item):
         '''some updating going on'''
