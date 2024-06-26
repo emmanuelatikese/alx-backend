@@ -4,7 +4,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    '''the class begins here'''
+    '''the Lifo class begins here'''
     def put(self, key, item):
         '''discard the last item'''
         if key is None or item is None:
