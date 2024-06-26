@@ -12,7 +12,7 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         '''discard the last item'''
-        if not key and item is None:
+        if not key or item is None:
             return
         self.cache_data[key] = item
         self.cache_data.move_to_end(key)
