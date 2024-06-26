@@ -5,14 +5,12 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class FIFOCache(BaseCaching):
     '''functions fifo begins'''
-    cache_data = {}
-
     def put(self, key, item):
         '''this function is from parent class'''
         if key is None and item is None:
             return
         self.cache_data[key] = item
-        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
+        if len(self.cache_data) > self.MAX_ITEMS:
             _key = list(self.cache_data.keys())[0]
             del self.cache_data[_key]
             print("DISCARD: {}".format(_key))
