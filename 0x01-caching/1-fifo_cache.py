@@ -12,7 +12,7 @@ class FIFOCache(BaseCaching):
         if key is None and item is None:
             return
         self.cache_data[key] = item
-        if len(self.cache_data) > self.MAX_ITEMS:
+        if len(self.cache_data) > BaseCaching.MAX_ITEMS:
             _key = list(self.cache_data.keys())[0]
             del self.cache_data[_key]
             print("DISCARD: {}".format(_key))
