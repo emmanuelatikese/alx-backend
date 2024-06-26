@@ -6,14 +6,13 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 class MRUCache(BaseCaching):
     '''the MRU class begins here'''
-
     def __init__(self):
         super().__init__()
         self.cache_data = OrderedDict()
 
     def put(self, key, item):
-        '''discard the last item'''
-        if not key and item is None:
+        '''discard the most recently item'''
+        if not key or item is None:
             return
         self.cache_data[key] = item
         self.cache_data.move_to_end(key)
