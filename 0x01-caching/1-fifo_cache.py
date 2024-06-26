@@ -4,12 +4,11 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
-    '''Here we go!!! with this, I guess ...'''
+    '''functions fifo begins'''
     cache_data = {}
 
     def put(self, key, item):
-        '''not going to lie this is my first'''
-
+        '''this function is from parent class'''
         if key is None and item is None:
             return
         self.cache_data[key] = item
