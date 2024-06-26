@@ -7,7 +7,7 @@ class LIFOCache(BaseCaching):
     '''the class begins here'''
     def put(self, key, item):
         '''discard the last item'''
-        if not key or item is None:
+        if key is None or item is None:
             return
         self.cache_data[key] = item
         if len(self.cache_data) > self.MAX_ITEMS:
