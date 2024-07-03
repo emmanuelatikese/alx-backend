@@ -16,10 +16,10 @@ app.config.from_object(Config)
 app.url_map.strict_slashes = False
 
 @app.route('/')
-def index():
+def index() -> str:
     '''first page start here'''
     return render_template('1-index.html')
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
