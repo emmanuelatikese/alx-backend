@@ -6,12 +6,17 @@ import pytz
 from datetime import datetime
 
 
+class Config:
+    '''all about config settings'''
+    BABEL_DEFAULT_LOCALE = 'en-US'
+    LANGUAGES = ["en", "fr"]
+    BABEL_DEFAULT_TIMEZONE = 'UTC'
+
+
 app = Flask(__name__)
 babel = Babel(app)
-
-app.config['BABEL_DEFAULT_LOCALE'] = 'en-US'
-app.config['BABEL_SUPPORTED_LOCALES'] = ["en", "fr"]
-app.config['BABEL_DEFAULT_TIMEZONE'] = 'UTC'
+app.config.from_object(Config)
+app.url_map.strict_slashes = False
 
 users = {
     1: {"name": "Balou", "locale": "fr", "timezone": "Europe/Paris"},
@@ -28,12 +33,14 @@ def get_user():
 
 @app.before_request
 def before_request():
+    '''happens before'''
     act_user = get_user()
     g.user = act_user if act_user else None
 
 
 @babel.localeselector
 def get_locale():
+    '''getting locale'''
     user = getattr(g, 'user', None)
     if user is not None:
         return user['locale'] if user['locale'] in ['en', 'fr'] else 'en'
@@ -45,6 +52,7 @@ def get_locale():
 
 @babel.timezoneselector
 def get_timezone():
+    '''timezone here'''
     try:
         user = getattr(g, 'user', None)
         if user is not None:
@@ -59,8 +67,6 @@ def get_timezone():
 @app.route("/login_as=<login_as>")
 def index(locale: str | None = None, login_as: str | None = None):
     '''first page start here'''
-    home_title = gettext("Welcome to Holberton")
-    home_header = gettext("Hello world!")
     act_user = getattr(g, 'user', None)
     logged_in_as = gettext("You are logged in as")
     not_logged_in = gettext("You are not logged in.")
@@ -74,8 +80,6 @@ def index(locale: str | None = None, login_as: str | None = None):
     formatted_time = _localized.strftime(format_time)
     return render_template(
         'index.html',
-        home_header=home_header,
-        home_title=home_title,
         act_user=act_user,
         logged_in_as=logged_in_as,
         not_logged_in=not_logged_in,
