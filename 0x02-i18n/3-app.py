@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''here we go'''
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel
 
 
 class Config:
@@ -14,24 +14,19 @@ class Config:
 app = Flask(__name__)
 babel = Babel(app)
 app.config.from_object(Config)
+app.url_map.strict_slashes = False
 
 
 @babel.localeselector
 def get_locale() -> str:
-    '''getting locale information'''
+    '''getting locale'''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
 def index() -> str:
     '''first page start here'''
-    home_title = gettext("Welcome to Holberton")
-    home_header = gettext("Hello world!")
-    return render_template(
-        '3-index.html',
-        home_header=home_header,
-        home_title=home_title
-        )
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
