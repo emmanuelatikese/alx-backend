@@ -18,7 +18,7 @@ app.url_map.strict_slashes = False
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     local_det = request.args.get('locale')
     if local_det in app.config['BABEL_SUPPORTED_LOCALES']:
         return local_det
@@ -27,7 +27,7 @@ def get_locale():
 
 @app.route('/')
 @app.route("/locale=<locale>")
-def index(locale: str | None = None):
+def index(locale: str | None = None) -> str:
     '''first page start here'''
     return render_template('4-index.html')
 
